@@ -17,7 +17,7 @@ if True:
   async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     channel = client.guilds[0].text_channels[0]
-    await channel.send('gday')
+    await channel.send('I am online.')
 
   @client.command()
   async def poggers(ctx):
@@ -40,6 +40,11 @@ if True:
       await ctx.send(text + temp.choices[0].text)
     else:
       await ctx.send("you don't have perms")
+
+  @client.command()
+  async def question(ctx, *, text):
+    
+
 
   keep_alive()
 
