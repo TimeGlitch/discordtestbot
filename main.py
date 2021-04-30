@@ -10,11 +10,7 @@ from replit import db
 
 client = commands.Bot(command_prefix = '$')
 openai.api_key = os.environ['OPENAI_API_KEY']
-temp = openai.Completion.create(
-  engine="davinci",
-  prompt="Once upon a time",
-  max_tokens=5
-)
+
 
 if True:
   @client.event
@@ -33,10 +29,15 @@ if True:
     await ctx.send(quote)
 
   @client.command()
-  async def gpt(ctx, text):
+  async def gpt(ctx, *, text):
     role = discord.utils.find(lambda r: r.name == 'tester', ctx.guild.roles)
     if role in ctx.author.roles:
-      await ctx.send("you have perms")
+      temp = openai.Completion.create(
+        engine = "davinci",
+        prompt = text,
+        max_tokens= 50
+      )
+      await ctx.send(text + temp.choices[0].text)
     else:
       await ctx.send("you don't have perms")
 
